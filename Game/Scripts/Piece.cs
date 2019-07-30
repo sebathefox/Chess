@@ -12,16 +12,18 @@ namespace Game.Scripts
         protected Vector2 _pixelPosition;
         private Texture2D _texture;
         private KeyboardState _oldState;
+        private GameColor _color;
 
         protected Vector2 _position;
 
-        public Piece(int id, Vector2 position, Vector2 pixelPosition, Texture2D texture)
+        public Piece(int id, Vector2 position, Vector2 pixelPosition, Texture2D texture, GameColor color)
         {
             _id = id;
             _position = position;
             _pixelPosition = pixelPosition;
             _texture = texture;
             _oldState = Keyboard.GetState();
+            _color = color;
         }
         
         public virtual void Update(GameTime gameTime)
@@ -43,7 +45,7 @@ namespace Game.Scripts
         public virtual void Draw(ref SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(_texture, _pixelPosition, Color.White);
+            spriteBatch.Draw(_texture, _pixelPosition, Microsoft.Xna.Framework.Color.White);
             spriteBatch.End();
         }
 
@@ -51,5 +53,10 @@ namespace Game.Scripts
 
         public Vector2 PixelPosition => _pixelPosition;
         public Texture2D Texture => _texture;
+
+        public GameColor Color
+        {
+            get { return _color; }
+        }
     }
 }

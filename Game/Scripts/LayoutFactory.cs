@@ -30,7 +30,7 @@ namespace Game.Scripts
 
             for (int i = 0; i < pieces.Length; i++)
             {
-                pieces[i] = new Pawn(9 + i, new Vector2(i, 1), new Vector2(64 * i, yOffset), ResourceManager.Instance.Textures[color.ToString().ToLower() + "_pawn"]);
+                pieces[i] = new Pawn(9 + i, new Vector2(i, 1), new Vector2(64 * i, yOffset), ResourceManager.Instance.Textures[color.ToString().ToLower() + "_pawn"], color);
             }
             
             return pieces;
