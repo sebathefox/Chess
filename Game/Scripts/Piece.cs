@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,6 +17,8 @@ namespace Game.Scripts
 
         protected Vector2 _position;
 
+        protected List<Field> _moveableFields;
+
         public Piece(int id, Vector2 position, Vector2 pixelPosition, Texture2D texture, GameColor color)
         {
             _id = id;
@@ -24,6 +27,7 @@ namespace Game.Scripts
             _texture = texture;
             _oldState = Keyboard.GetState();
             _color = color;
+            _moveableFields = new List<Field>();
         }
         
         public virtual void Update(GameTime gameTime)
@@ -50,6 +54,8 @@ namespace Game.Scripts
         }
 
         public virtual void Move(Vector2 newPosition) { }
+
+        public abstract void GetMoveableFields();
 
         public Vector2 PixelPosition => _pixelPosition;
         public Texture2D Texture => _texture;

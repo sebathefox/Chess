@@ -78,6 +78,14 @@ namespace Game
             spriteBatch.Draw(_tex, new Vector2(0, 0), Color.White);
             spriteBatch.End();
 
+            
+//            spriteBatch.Begin();
+//            foreach (Field field in ResourceManager.Instance.Fields)
+//            {
+//                spriteBatch.Draw(ResourceManager.Instance.Textures["black_knight"], field.Rect, Color.CornflowerBlue);
+//            }
+//            spriteBatch.End();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
             _player.Draw(ref spriteBatch);
             // TODO: Add your drawing code here
 
