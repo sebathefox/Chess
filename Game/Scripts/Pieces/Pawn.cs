@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -43,11 +44,14 @@ namespace Game.Scripts.Pieces
 
             foreach (Field field in _moveableFields)
             {
-                if (field.Rect.Contains(state.Position))
+                if (field.Rect.Contains(state.Position)  && state.LeftButton == ButtonState.Pressed &&
+                    _oldMouseState.LeftButton == ButtonState.Released && _selected)
                 {
                     Move(field);
                 }
             }
+            
+            _moveableFields.Clear();
             
             _oldMouseState = state;
             
@@ -61,16 +65,16 @@ namespace Game.Scripts.Pieces
 
         public override void GetMoveableFields()
         {
-            
-            
             for (int i = 0; i < 4; i++)
             {
                 Field field = null;
 
-                if (_position.X >= 0 && _position.Y >= 0 && _position.X <= 7 && _position.Y <= 7)
+                if (_position.X >= 0 && _position.Y >= 0 && _position.X <= 8 && _position.Y <= 8)
                 {
                     if (i < 3)
+                    {
                         field = ResourceManager.Instance.Fields[(int) (_position.X - 1) + i, (int) _position.Y + 1];
+                    }
                     else if (!_hasMoved)
                     {
                         field = ResourceManager.Instance.Fields[(int) _position.X, (int) _position.Y + 2];
@@ -102,12 +106,16 @@ namespace Game.Scripts.Pieces
             }
             
             // Kill the other piece.
+
+            this._hasMoved = true;
             
             moveableField.Piece = this;
 
             this._position = moveableField.Id;
 
             this._pixelPosition = moveableField.Rect.Location.ToVector2();
+
+            this._selected = false;
         }
     }
 }
