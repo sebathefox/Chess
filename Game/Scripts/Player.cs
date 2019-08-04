@@ -1,3 +1,4 @@
+using System.Collections;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Scripts
@@ -8,7 +9,7 @@ namespace Game.Scripts
         White
     }
     
-    public class Player
+    public class Player : IEnumerable
     {
         private Piece[] _pieces;
 
@@ -41,5 +42,9 @@ namespace Game.Scripts
         public Piece this[int index] => _pieces[index];
 
         public GameColor Color => _color;
+        public IEnumerator GetEnumerator()
+        {
+            return _pieces.GetEnumerator();
+        }
     }
 }

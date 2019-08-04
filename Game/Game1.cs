@@ -11,7 +11,6 @@ namespace Game
         SpriteBatch spriteBatch;
 
         private Texture2D _tex;
-        private Player _player;
 
         
 
@@ -49,7 +48,7 @@ namespace Game
 
             // TODO: use this.Content to load your game content here
             
-            _player = new Player(GameColor.Black);
+            ResourceManager.Instance.Players[0] = new Player(GameColor.Black);
         }
 
         protected override void Update(GameTime gameTime)
@@ -62,8 +61,8 @@ namespace Game
 
             for (int i = 0; i < 16; i++)
             {
-                if(_player[i] != null)
-                    _player[i].Update(gameTime);
+                if(ResourceManager.Instance.Players[0][i] != null)
+                    ResourceManager.Instance.Players[0][i].Update(gameTime);
             }
             
 
@@ -78,15 +77,7 @@ namespace Game
             spriteBatch.Draw(_tex, new Vector2(0, 0), Color.White);
             spriteBatch.End();
 
-            
-//            spriteBatch.Begin();
-//            foreach (Field field in ResourceManager.Instance.Fields)
-//            {
-//                spriteBatch.Draw(ResourceManager.Instance.Textures["black_knight"], field.Rect, Color.CornflowerBlue);
-//            }
-//            spriteBatch.End();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-
-            _player.Draw(ref spriteBatch);
+            ResourceManager.Instance.Players[0].Draw(ref spriteBatch);
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);

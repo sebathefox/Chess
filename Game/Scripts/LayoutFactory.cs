@@ -10,7 +10,13 @@ namespace Game.Scripts
             Piece[] pieces = new Piece[16];
 
             Piece[] pawns = GeneratePawns(GameColor.Black);
+            Piece[] pawnz = GeneratePawns(GameColor.Black);
 
+            for (int i = 0; i < 8; i++)
+            {
+                pieces[i] = pawns[i];
+            }
+            
             for (int i = 8; i < 16; i++)
             {
                 pieces[i] = pawns[i - 8];

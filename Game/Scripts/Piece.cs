@@ -10,10 +10,13 @@ namespace Game.Scripts
     {
         protected int _id;
         
+        
+        protected bool _hasMoved;
+        protected bool _selected;
+        protected MouseState _oldMouseState;
         protected Vector2 _pixelPosition;
         private Texture2D _texture;
-        private KeyboardState _oldState;
-        private GameColor _color;
+        protected GameColor _color;
 
         protected Vector2 _position;
 
@@ -25,25 +28,48 @@ namespace Game.Scripts
             _position = position;
             _pixelPosition = pixelPosition;
             _texture = texture;
-            _oldState = Keyboard.GetState();
+            _hasMoved = false;
+            _selected = false;
+            _oldMouseState = Mouse.GetState();
             _color = color;
             _moveableFields = new List<Field>();
         }
         
         public virtual void Update(GameTime gameTime)
         {
-            KeyboardState state = Keyboard.GetState();
+            MouseState state = Mouse.GetState();
 
-            if (state[Keys.W] == KeyState.Down && _oldState[Keys.W] == KeyState.Up)
-                _pixelPosition.Y -= 64;
-            if (state[Keys.S] == KeyState.Down && _oldState[Keys.S] == KeyState.Up)
-                _pixelPosition.Y += 64;
-            if (state[Keys.A] == KeyState.Down && _oldState[Keys.A] == KeyState.Up)
-                _pixelPosition.X -= 64;
-            if (state[Keys.D] == KeyState.Down && _oldState[Keys.D] == KeyState.Up)
-                _pixelPosition.X += 64;
+            Rectangle rect = new Rectangle(_pixelPosition.ToPoint(), new Point(Texture.Height));
+            
+            if (rect.Contains(state.Position) && state.LeftButton == ButtonState.Pressed &&
+                _oldMouseState.LeftButton == ButtonState.Released && _selected)
+            {
+                _selected = false;
+            }
+            else if (rect.Contains(state.Position) && state.LeftButton == ButtonState.Pressed &&
+                     _oldMouseState.LeftButton == ButtonState.Released)
+            {
+                _selected = true;
+            }
 
-            _oldState = state;
+
+            if (_selected && _moveableFields.Count < 1)
+            {
+                GetMoveableFields();
+            }
+
+            foreach (Field field in _moveableFields)
+            {
+                if (field.Rect.Contains(state.Position)  && state.LeftButton == ButtonState.Pressed &&
+                    _oldMouseState.LeftButton == ButtonState.Released && _selected)
+                {
+                    Move(field);
+                }
+            }
+            
+            _moveableFields.Clear();
+            
+            _oldMouseState = state;
         }
 
         public virtual void Draw(ref SpriteBatch spriteBatch)
@@ -53,8 +79,79 @@ namespace Game.Scripts
             spriteBatch.End();
         }
 
-        public virtual void Move(Vector2 newPosition) { }
+        protected void Move(Field moveableField)
+        {
+            if (moveableField.Piece != null)
+            {
+                if (moveableField.Piece.Color == Color)
+                {
+                    // Don't Move.
+                }
+            }
+            
+            // Kill the other piece.
 
+            this._hasMoved = true;
+            
+            moveableField.Piece = this;
+
+            this._position = moveableField.Id;
+
+            this._pixelPosition = moveableField.Rect.Location.ToVector2();
+
+            this._selected = false;
+        }
+
+        protected bool AddMoveableField(Point pos)
+        {
+            bool blockIsEmpty = true;
+            bool blockOutOfBounds = true;
+            
+            if (_position.X >= 1 && _position.Y >= 1 && _position.X <= 7 && _position.Y <= 7)
+            {
+                blockOutOfBounds = false;
+
+                foreach (Piece piece in ResourceManager.Instance.Players[0])
+                {
+                    if (pos == piece._position.ToPoint())
+                    {
+                        if (ResourceManager.Instance.Players[0].Color != _color)
+                        {
+                            _moveableFields.Add(ResourceManager.Instance.Fields[pos.X, pos.Y]);
+                        }
+
+                        blockIsEmpty = false;
+                        break;
+                    }
+                }
+
+                if (blockIsEmpty)
+                {
+                    _moveableFields.Add(ResourceManager.Instance.Fields[pos.X, pos.Y]);
+                }
+            }
+
+            return !blockIsEmpty || blockOutOfBounds;
+        }
+
+        protected void FindFieldsHorizontal()
+        {
+            Point pos = _position.ToPoint();
+
+            for (int i = 0; i < 7; i++)
+            {
+                pos.X += i;
+                if(AddMoveableField(pos)) break;
+            }
+
+            pos = _position.ToPoint();
+            
+            for (int i = 0; i < 7; i++) {   
+                pos.X -= 1;
+                if (AddMoveableField(pos)) break;
+            }
+        }
+        
         public abstract void GetMoveableFields();
 
         public Vector2 PixelPosition => _pixelPosition;
