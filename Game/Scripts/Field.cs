@@ -6,10 +6,10 @@ namespace Game.Scripts
 {
     public class Field
     {
-        private Vector2 _id;
-        private Rectangle _rect;
+        private readonly Vector2 _id;
+        private readonly Rectangle _rect;
 
-        private Texture2D _hover;
+        private readonly Texture2D _hover;
 
         private bool _hoverEnabled;
         
@@ -36,12 +36,10 @@ namespace Game.Scripts
 
         public void Draw(ref SpriteBatch spriteBatch)
         {
-            if (_hoverEnabled)
-            {
-                spriteBatch.Begin();
-                spriteBatch.Draw(_hover, _rect, Color.CornflowerBlue);
-                spriteBatch.End();
-            }
+            if (!_hoverEnabled) return;
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied);
+            spriteBatch.Draw(_hover, _rect, Color.White);
+            spriteBatch.End();
         }
         
         public bool HoverEnabled { get => _hoverEnabled; set => _hoverEnabled = value; }

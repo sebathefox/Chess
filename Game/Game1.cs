@@ -10,7 +10,7 @@ namespace Game
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private Texture2D _tex;
+        private Texture2D _board;
 
         
 
@@ -37,7 +37,7 @@ namespace Game
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _tex = Content.Load<Texture2D>("board");
+            _board = Content.Load<Texture2D>("board");
 
             ResourceManager.Instance.LoadTexture(Content, "black_bishop");
             ResourceManager.Instance.LoadTexture(Content, "black_castle");
@@ -48,8 +48,6 @@ namespace Game
             
             ResourceManager.Instance.LoadTexture(Content, "hover_field");
 
-            // TODO: use this.Content to load your game content here
-            
             ResourceManager.Instance.Init();
             
             ResourceManager.Instance.Players[0] = new Player(GameColor.Black);
@@ -60,8 +58,6 @@ namespace Game
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            // TODO: Add your update logic here
 
             for (int i = 0; i < 16; i++)
             {
@@ -78,11 +74,10 @@ namespace Game
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            spriteBatch.Draw(_tex, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(_board, new Vector2(0, 0), Color.White);
             spriteBatch.End();
 
             ResourceManager.Instance.Players[0].Draw(ref spriteBatch);
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
