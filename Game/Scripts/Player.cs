@@ -31,10 +31,7 @@ namespace Game.Scripts
         {
             foreach (Piece piece in _pieces)
             {
-                if(piece == null)
-                    continue;
-                
-                piece.Draw(ref spriteBatch);
+                piece?.Draw(ref spriteBatch);
             }
         }
         

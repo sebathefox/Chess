@@ -45,6 +45,7 @@ namespace Game.Scripts
                 _oldMouseState.LeftButton == ButtonState.Released && _selected)
             {
                 _selected = false;
+                _moveableFields.Clear();
             }
             else if (rect.Contains(state.Position) && state.LeftButton == ButtonState.Pressed &&
                      _oldMouseState.LeftButton == ButtonState.Released)
@@ -58,16 +59,21 @@ namespace Game.Scripts
                 GetMoveableFields();
             }
 
-            foreach (Field field in _moveableFields)
-            {
-                if (field.Rect.Contains(state.Position)  && state.LeftButton == ButtonState.Pressed &&
-                    _oldMouseState.LeftButton == ButtonState.Released && _selected)
+            if(_selected && _moveableFields.Count > 0)
+                for (int i = 0; i < _moveableFields.Count; i++)
                 {
-                    Move(field);
+                    _moveableFields[i].HoverEnabled = true;
+                    
+                    if (_moveableFields[i].Rect.Contains(state.Position)  && state.LeftButton == ButtonState.Pressed &&
+                        _oldMouseState.LeftButton == ButtonState.Released && _selected)
+                    {
+                        Move(_moveableFields[i]);
+                    }
                 }
-            }
             
-            _moveableFields.Clear();
+            
+//            _moveableFields.Clear();
+            
             
             _oldMouseState = state;
         }
@@ -77,6 +83,11 @@ namespace Game.Scripts
             spriteBatch.Begin();
             spriteBatch.Draw(_texture, _pixelPosition, Microsoft.Xna.Framework.Color.White);
             spriteBatch.End();
+
+            foreach (Field field in _moveableFields)
+            {
+                field.Draw(ref spriteBatch);
+            }
         }
 
         protected void Move(Field moveableField)
@@ -88,10 +99,14 @@ namespace Game.Scripts
                     // Don't Move.
                 }
             }
-            
+
             // Kill the other piece.
 
+            this._selected = false;
+            
             this._hasMoved = true;
+
+            ResourceManager.Instance.Fields[(int) _position.X, (int) _position.Y].Piece = null;
             
             moveableField.Piece = this;
 
@@ -99,7 +114,9 @@ namespace Game.Scripts
 
             this._pixelPosition = moveableField.Rect.Location.ToVector2();
 
-            this._selected = false;
+            
+            
+            _moveableFields.Clear();
         }
 
         protected bool AddMoveableField(Point pos)
@@ -107,7 +124,7 @@ namespace Game.Scripts
             bool blockIsEmpty = true;
             bool blockOutOfBounds = true;
             
-            if (_position.X >= 1 && _position.Y >= 1 && _position.X <= 7 && _position.Y <= 7)
+            if (_position.X >= 0 && _position.Y >= 0 && _position.X <= 7 && _position.Y <= 7)
             {
                 blockOutOfBounds = false;
 

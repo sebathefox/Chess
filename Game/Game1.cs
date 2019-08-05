@@ -45,8 +45,12 @@ namespace Game
             ResourceManager.Instance.LoadTexture(Content, "black_knight");
             ResourceManager.Instance.LoadTexture(Content, "black_pawn");
             ResourceManager.Instance.LoadTexture(Content, "black_queen");
+            
+            ResourceManager.Instance.LoadTexture(Content, "hover_field");
 
             // TODO: use this.Content to load your game content here
+            
+            ResourceManager.Instance.Init();
             
             ResourceManager.Instance.Players[0] = new Player(GameColor.Black);
         }

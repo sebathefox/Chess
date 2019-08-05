@@ -21,6 +21,11 @@ namespace Game.Scripts
             
             _fields = new Field[ 8, 8];
 
+            
+        }
+
+        public void Init()
+        {
             for (int y = 0; y < 8; y++)
             {
                 for (int x = 0; x < 8; x++)
@@ -31,7 +36,7 @@ namespace Game.Scripts
             
             _players = new Player[2];
         }
-
+        
         static ResourceManager()
         {
             if(_instance == null)
