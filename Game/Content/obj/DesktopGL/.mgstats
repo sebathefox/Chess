@@ -1,0 +1,15 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"/home/sebastian/RiderProjects/Chess/Game/Content/black_bishop.png","/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/black_bishop.xnb","TextureProcessor","Texture2DContent",6032,16469,0.287555
+"/home/sebastian/RiderProjects/Chess/Game/Content/black_castle.png","/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/black_castle.xnb","TextureProcessor","Texture2DContent",7074,16469,0.003706
+"/home/sebastian/RiderProjects/Chess/Game/Content/black_king.png","/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/black_king.xnb","TextureProcessor","Texture2DContent",8119,16469,0.004159
+"/home/sebastian/RiderProjects/Chess/Game/Content/black_knight.png","/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/black_knight.xnb","TextureProcessor","Texture2DContent",6271,16469,0.006233
+"/home/sebastian/RiderProjects/Chess/Game/Content/black_pawn.png","/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/black_pawn.xnb","TextureProcessor","Texture2DContent",6734,16469,0.004408
+"/home/sebastian/RiderProjects/Chess/Game/Content/black_queen.png","/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/black_queen.xnb","TextureProcessor","Texture2DContent",8162,16469,0.003606
+"/home/sebastian/RiderProjects/Chess/Game/Content/board.png","/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/board.xnb","TextureProcessor","Texture2DContent",2022,1048661,0.405976
+"/home/sebastian/RiderProjects/Chess/Game/Content/hover_field.png","/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/hover_field.xnb","TextureProcessor","Texture2DContent",246,16469,0.215979
+"/home/sebastian/RiderProjects/Chess/Game/Content/white_bishop.png","/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/white_bishop.xnb","TextureProcessor","Texture2DContent",4750,16469,0.226742
+"/home/sebastian/RiderProjects/Chess/Game/Content/white_castle.png","/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/white_castle.xnb","TextureProcessor","Texture2DContent",5714,16469,0.006028
+"/home/sebastian/RiderProjects/Chess/Game/Content/white_king.png","/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/white_king.xnb","TextureProcessor","Texture2DContent",6459,16469,0.003273
+"/home/sebastian/RiderProjects/Chess/Game/Content/white_knight.png","/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/white_knight.xnb","TextureProcessor","Texture2DContent",4916,16469,0.00319
+"/home/sebastian/RiderProjects/Chess/Game/Content/white_pawn.png","/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/white_pawn.xnb","TextureProcessor","Texture2DContent",5189,16469,0.003253
+"/home/sebastian/RiderProjects/Chess/Game/Content/white_queen.png","/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/white_queen.xnb","TextureProcessor","Texture2DContent",6352,16469,0.003126

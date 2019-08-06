@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>/home/sebastian/RiderProjects/Chess/Game/Content/black_bishop.png</File>
+    <File>/home/sebastian/RiderProjects/Chess/Game/Content/black_castle.png</File>
+    <File>/home/sebastian/RiderProjects/Chess/Game/Content/black_king.png</File>
+    <File>/home/sebastian/RiderProjects/Chess/Game/Content/black_knight.png</File>
+    <File>/home/sebastian/RiderProjects/Chess/Game/Content/black_pawn.png</File>
+    <File>/home/sebastian/RiderProjects/Chess/Game/Content/black_queen.png</File>
+    <File>/home/sebastian/RiderProjects/Chess/Game/Content/board.png</File>
+    <File>/home/sebastian/RiderProjects/Chess/Game/Content/hover_field.png</File>
+    <File>/home/sebastian/RiderProjects/Chess/Game/Content/white_bishop.png</File>
+    <File>/home/sebastian/RiderProjects/Chess/Game/Content/white_castle.png</File>
+    <File>/home/sebastian/RiderProjects/Chess/Game/Content/white_king.png</File>
+    <File>/home/sebastian/RiderProjects/Chess/Game/Content/white_knight.png</File>
+    <File>/home/sebastian/RiderProjects/Chess/Game/Content/white_pawn.png</File>
+    <File>/home/sebastian/RiderProjects/Chess/Game/Content/white_queen.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
