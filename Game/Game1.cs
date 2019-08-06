@@ -46,11 +46,19 @@ namespace Game
             ResourceManager.Instance.LoadTexture(Content, "black_pawn");
             ResourceManager.Instance.LoadTexture(Content, "black_queen");
             
+            ResourceManager.Instance.LoadTexture(Content, "white_bishop");
+            ResourceManager.Instance.LoadTexture(Content, "white_castle");
+            ResourceManager.Instance.LoadTexture(Content, "white_king");
+            ResourceManager.Instance.LoadTexture(Content, "white_knight");
+            ResourceManager.Instance.LoadTexture(Content, "white_pawn");
+            ResourceManager.Instance.LoadTexture(Content, "white_queen");
+            
             ResourceManager.Instance.LoadTexture(Content, "hover_field");
 
             ResourceManager.Instance.Init();
             
             ResourceManager.Instance.Players[0] = new Player(GameColor.Black);
+            ResourceManager.Instance.Players[1] = new Player(GameColor.White);
         }
 
         protected override void Update(GameTime gameTime)
@@ -63,6 +71,9 @@ namespace Game
             {
                 if(ResourceManager.Instance.Players[0][i] != null)
                     ResourceManager.Instance.Players[0][i].Update(gameTime);
+                
+                if(ResourceManager.Instance.Players[1][i] != null)
+                    ResourceManager.Instance.Players[1][i].Update(gameTime);
             }
             
 
@@ -78,6 +89,7 @@ namespace Game
             spriteBatch.End();
 
             ResourceManager.Instance.Players[0].Draw(ref spriteBatch);
+            ResourceManager.Instance.Players[1].Draw(ref spriteBatch);
 
             base.Draw(gameTime);
         }

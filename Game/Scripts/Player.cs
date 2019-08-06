@@ -24,6 +24,9 @@ namespace Game.Scripts
                 case GameColor.Black:
                     _pieces = LayoutFactory.GenerateBlack();
                     break;
+                case GameColor.White:
+                    _pieces = LayoutFactory.GenerateWhite();
+                    break;
             }
         }
 

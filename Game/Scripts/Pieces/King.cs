@@ -7,7 +7,7 @@ namespace Game.Scripts.Pieces
 {
     public class King : Piece
     {
-        public King(int id, Vector2 position, Vector2 pixelPosition, Texture2D texture, GameColor color) : base(id, position, pixelPosition, texture, color)
+        public King(int id, Vector2 position, Vector2 pixelPosition, Texture2D texture, GameColor color) : base(position, pixelPosition, texture, color)
         {
         }
 

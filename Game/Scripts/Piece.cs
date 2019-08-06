@@ -6,11 +6,11 @@ using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace Game.Scripts
 {
-    public abstract class Piece : IPiece
+    /// <summary>
+    /// The abstract base class all pieces must inherit.
+    /// </summary>
+    public abstract class Piece
     {
-        protected int _id;
-        
-        
         protected bool _hasMoved;
         protected bool _selected;
         protected MouseState _oldMouseState;
@@ -22,9 +22,15 @@ namespace Game.Scripts
 
         protected List<Field> _moveableFields;
 
-        public Piece(int id, Vector2 position, Vector2 pixelPosition, Texture2D texture, GameColor color)
+        /// <summary>
+        /// Creates a new Piece if used as base constructer call.
+        /// </summary>
+        /// <param name="position">The 'virtual' position of the Piece</param>
+        /// <param name="pixelPosition">The position in pixels of the Piece</param>
+        /// <param name="texture">The Texture of the Piece</param>
+        /// <param name="color">The Color of the Piece</param>
+        public Piece(Vector2 position, Vector2 pixelPosition, Texture2D texture, GameColor color)
         {
-            _id = id;
             _position = position;
             _pixelPosition = pixelPosition;
             _texture = texture;
@@ -35,6 +41,10 @@ namespace Game.Scripts
             _moveableFields = new List<Field>();
         }
         
+        /// <summary>
+        /// Runs every time the main gameloop reaches it's Update method.
+        /// </summary>
+        /// <param name="gameTime">The deltatime for the game.</param>
         public virtual void Update(GameTime gameTime)
         {
             MouseState state = Mouse.GetState();
@@ -72,9 +82,6 @@ namespace Game.Scripts
                 }
             
             
-//            _moveableFields.Clear();
-            
-            
             _oldMouseState = state;
         }
 
@@ -97,10 +104,13 @@ namespace Game.Scripts
                 if (moveableField.Piece.Color == Color)
                 {
                     // Don't Move.
+                    _moveableFields.Clear();
+                    return;
                 }
+                // Kill the other piece.
+                
+                moveableField.Piece.Kill();
             }
-
-            // Kill the other piece.
 
             this._selected = false;
             
@@ -117,6 +127,11 @@ namespace Game.Scripts
             
             
             _moveableFields.Clear();
+        }
+
+        private void Kill()
+        {
+            
         }
 
         protected bool AddMoveableField(Point pos)
@@ -150,28 +165,9 @@ namespace Game.Scripts
 
             return !blockIsEmpty || blockOutOfBounds;
         }
-
-        protected void FindFieldsHorizontal()
-        {
-            Point pos = _position.ToPoint();
-
-            for (int i = 0; i < 7; i++)
-            {
-                pos.X += i;
-                if(AddMoveableField(pos)) break;
-            }
-
-            pos = _position.ToPoint();
-            
-            for (int i = 0; i < 7; i++) {   
-                pos.X -= 1;
-                if (AddMoveableField(pos)) break;
-            }
-        }
         
         public abstract void GetMoveableFields();
 
-        public Vector2 PixelPosition => _pixelPosition;
         public Texture2D Texture => _texture;
 
         public GameColor Color

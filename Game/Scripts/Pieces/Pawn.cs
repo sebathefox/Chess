@@ -9,7 +9,7 @@ namespace Game.Scripts.Pieces
 {
     public class Pawn : Piece
     {
-        public Pawn(int id, Vector2 position, Vector2 pixelPosition, Texture2D texture, GameColor color) : base(id, position, pixelPosition, texture, color) { }
+        public Pawn(int id, Vector2 position, Vector2 pixelPosition, Texture2D texture, GameColor color) : base(position, pixelPosition, texture, color) { }
 
 //        public override void Update(GameTime gameTime)
 //        {
@@ -54,7 +54,15 @@ namespace Game.Scripts.Pieces
 
             if (_color == GameColor.White)
             {
-                
+                if (_position.Y - 1 >= 0)
+                {
+                    if(_position.X - 1 >= 0)
+                        fields.Add(ResourceManager.Instance.Fields[(int)_position.X - 1, (int)_position.Y - 1]);
+                    fields.Add(ResourceManager.Instance.Fields[(int)_position.X, (int)_position.Y - 1]);
+                    
+                    if(_position.X + 1 <= 7)
+                        fields.Add(ResourceManager.Instance.Fields[(int)_position.X + 1, (int)_position.Y - 1]);
+                }
             }
             else
             {
