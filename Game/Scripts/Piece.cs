@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -17,6 +19,7 @@ namespace Game.Scripts
         protected Vector2 _pixelPosition;
         private Texture2D _texture;
         protected GameColor _color;
+        private int _id;
 
         protected Vector2 _position;
 
@@ -29,7 +32,7 @@ namespace Game.Scripts
         /// <param name="pixelPosition">The position in pixels of the Piece</param>
         /// <param name="texture">The Texture of the Piece</param>
         /// <param name="color">The Color of the Piece</param>
-        public Piece(Vector2 position, Vector2 pixelPosition, Texture2D texture, GameColor color)
+        public Piece(int id, Vector2 position, Vector2 pixelPosition, Texture2D texture, GameColor color)
         {
             _position = position;
             _pixelPosition = pixelPosition;
@@ -39,6 +42,7 @@ namespace Game.Scripts
             _oldMouseState = Mouse.GetState();
             _color = color;
             _moveableFields = new List<Field>();
+            _id = id;
         }
         
         /// <summary>
@@ -47,6 +51,9 @@ namespace Game.Scripts
         /// <param name="gameTime">The deltatime for the game.</param>
         public virtual void Update(GameTime gameTime)
         {
+            if(_texture == null)
+                return;
+            
             MouseState state = Mouse.GetState();
 
             Rectangle rect = new Rectangle(_pixelPosition.ToPoint(), new Point(Texture.Height));
@@ -87,6 +94,9 @@ namespace Game.Scripts
 
         public virtual void Draw(ref SpriteBatch spriteBatch)
         {
+            if(_texture == null)
+                return;
+            
             spriteBatch.Begin();
             spriteBatch.Draw(_texture, _pixelPosition, Microsoft.Xna.Framework.Color.White);
             spriteBatch.End();
@@ -131,7 +141,22 @@ namespace Game.Scripts
 
         private void Kill()
         {
+            int plr = -1;
+            switch (_color)
+            {
+                case GameColor.Black:
+                    plr = 0;
+                    break;
+                case GameColor.White:
+                    plr = 1;
+                    break;
+            }
             
+            ResourceManager.Instance.Players[plr].KillPiece(_id);
+            _texture = null;
+            _position = new Vector2(-1, -1);
+            _pixelPosition = new Vector2(-64, -64);
+
         }
 
         protected bool AddMoveableField(Point pos)
@@ -145,6 +170,9 @@ namespace Game.Scripts
 
                 foreach (Piece piece in ResourceManager.Instance.Players[0])
                 {
+                    if (piece == null)
+                        continue;
+                    
                     if (pos == piece._position.ToPoint())
                     {
                         if (ResourceManager.Instance.Players[0].Color != _color)

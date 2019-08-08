@@ -37,11 +37,19 @@ namespace Game.Scripts
                 piece?.Draw(ref spriteBatch);
             }
         }
+
+        public void KillPiece(int piece)
+        {
+            _pieces[piece] = null;
+        }
         
 
-        public Piece this[int index] => _pieces[index];
+        public Piece this[int index] { get => _pieces[index];  set => _pieces[index] = value; }
 
         public GameColor Color => _color;
+
+        public Piece[] Pieces { get => _pieces; set => _pieces = value; }
+        
         public IEnumerator GetEnumerator()
         {
             return _pieces.GetEnumerator();

@@ -12,8 +12,6 @@ namespace Game
 
         private Texture2D _board;
 
-        
-
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -24,20 +22,13 @@ namespace Game
             graphics.PreferredBackBufferHeight = 600;
         }
 
-        protected override void Initialize()
-        {
-            // TODO: Add your initialization logic here
-
-            
-            
-            base.Initialize();
-        }
-
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _board = Content.Load<Texture2D>("board");
+
+            #region SpriteLoading
 
             ResourceManager.Instance.LoadTexture(Content, "black_bishop");
             ResourceManager.Instance.LoadTexture(Content, "black_castle");
@@ -55,6 +46,8 @@ namespace Game
             
             ResourceManager.Instance.LoadTexture(Content, "hover_field");
 
+            #endregion
+            
             ResourceManager.Instance.Init();
             
             ResourceManager.Instance.Players[0] = new Player(GameColor.Black);

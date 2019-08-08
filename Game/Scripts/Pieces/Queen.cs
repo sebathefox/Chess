@@ -6,7 +6,7 @@ using System;
  {
      public class Queen : Piece
      {
-         public Queen(int id, Vector2 position, Vector2 pixelPosition, Texture2D texture, GameColor color) : base(position, pixelPosition, texture, color)
+         public Queen(int id, Vector2 position, Vector2 pixelPosition, Texture2D texture, GameColor color) : base(id, position, pixelPosition, texture, color)
          {
          }
  

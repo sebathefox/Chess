@@ -6,7 +6,7 @@ namespace Game.Scripts.Pieces
 {
     public class Knight : Piece
     {
-        public Knight(int id, Vector2 position, Vector2 pixelPosition, Texture2D texture, GameColor color) : base(position, pixelPosition, texture, color) { }
+        public Knight(int id, Vector2 position, Vector2 pixelPosition, Texture2D texture, GameColor color) : base(id, position, pixelPosition, texture, color) { }
 
         public override void GetMoveableFields()
         {
