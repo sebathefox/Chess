@@ -1,3 +1,4 @@
+using System.Collections;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Scripts
@@ -8,7 +9,7 @@ namespace Game.Scripts
         White
     }
     
-    public class Player
+    public class Player : IEnumerable
     {
         private Piece[] _pieces;
 
@@ -23,6 +24,9 @@ namespace Game.Scripts
                 case GameColor.Black:
                     _pieces = LayoutFactory.GenerateBlack();
                     break;
+                case GameColor.White:
+                    _pieces = LayoutFactory.GenerateWhite();
+                    break;
             }
         }
 
@@ -30,16 +34,25 @@ namespace Game.Scripts
         {
             foreach (Piece piece in _pieces)
             {
-                if(piece == null)
-                    continue;
-                
-                piece.Draw(ref spriteBatch);
+                piece?.Draw(ref spriteBatch);
             }
+        }
+
+        public void KillPiece(int piece)
+        {
+            _pieces[piece] = null;
         }
         
 
-        public Piece this[int index] => _pieces[index];
+        public Piece this[int index] { get => _pieces[index];  set => _pieces[index] = value; }
 
         public GameColor Color => _color;
+
+        public Piece[] Pieces { get => _pieces; set => _pieces = value; }
+        
+        public IEnumerator GetEnumerator()
+        {
+            return _pieces.GetEnumerator();
+        }
     }
 }

@@ -10,10 +10,7 @@ namespace Game
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private Texture2D _tex;
-        private Player _player;
-
-        
+        private Texture2D _board;
 
         public Game1()
         {
@@ -25,20 +22,13 @@ namespace Game
             graphics.PreferredBackBufferHeight = 600;
         }
 
-        protected override void Initialize()
-        {
-            // TODO: Add your initialization logic here
-
-            
-            
-            base.Initialize();
-        }
-
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _tex = Content.Load<Texture2D>("board");
+            _board = Content.Load<Texture2D>("board");
+
+            #region SpriteLoading
 
             ResourceManager.Instance.LoadTexture(Content, "black_bishop");
             ResourceManager.Instance.LoadTexture(Content, "black_castle");
@@ -46,10 +36,22 @@ namespace Game
             ResourceManager.Instance.LoadTexture(Content, "black_knight");
             ResourceManager.Instance.LoadTexture(Content, "black_pawn");
             ResourceManager.Instance.LoadTexture(Content, "black_queen");
-
-            // TODO: use this.Content to load your game content here
             
-            _player = new Player(GameColor.Black);
+            ResourceManager.Instance.LoadTexture(Content, "white_bishop");
+            ResourceManager.Instance.LoadTexture(Content, "white_castle");
+            ResourceManager.Instance.LoadTexture(Content, "white_king");
+            ResourceManager.Instance.LoadTexture(Content, "white_knight");
+            ResourceManager.Instance.LoadTexture(Content, "white_pawn");
+            ResourceManager.Instance.LoadTexture(Content, "white_queen");
+            
+            ResourceManager.Instance.LoadTexture(Content, "hover_field");
+
+            #endregion
+            
+            ResourceManager.Instance.Init();
+            
+            ResourceManager.Instance.Players[0] = new Player(GameColor.Black);
+            ResourceManager.Instance.Players[1] = new Player(GameColor.White);
         }
 
         protected override void Update(GameTime gameTime)
@@ -58,12 +60,13 @@ namespace Game
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
             for (int i = 0; i < 16; i++)
             {
-                if(_player[i] != null)
-                    _player[i].Update(gameTime);
+                if(ResourceManager.Instance.Players[0][i] != null)
+                    ResourceManager.Instance.Players[0][i].Update(gameTime);
+                
+                if(ResourceManager.Instance.Players[1][i] != null)
+                    ResourceManager.Instance.Players[1][i].Update(gameTime);
             }
             
 
@@ -75,19 +78,11 @@ namespace Game
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            spriteBatch.Draw(_tex, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(_board, new Vector2(0, 0), Color.White);
             spriteBatch.End();
 
-            
-//            spriteBatch.Begin();
-//            foreach (Field field in ResourceManager.Instance.Fields)
-//            {
-//                spriteBatch.Draw(ResourceManager.Instance.Textures["black_knight"], field.Rect, Color.CornflowerBlue);
-//            }
-//            spriteBatch.End();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-
-            _player.Draw(ref spriteBatch);
-            // TODO: Add your drawing code here
+            ResourceManager.Instance.Players[0].Draw(ref spriteBatch);
+            ResourceManager.Instance.Players[1].Draw(ref spriteBatch);
 
             base.Draw(gameTime);
         }
