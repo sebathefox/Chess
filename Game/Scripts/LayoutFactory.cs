@@ -24,6 +24,16 @@ namespace Game.Scripts
             {
                 pieces[i] = pawns[i - 8];
             }
+
+            for (int y = 0, i = 0; y < 2; y++)
+            {
+                for (int x = 0; x < 8; x++)
+                {
+                    ResourceManager.Instance.Fields[(int) pieces[i].Position.X, (int) pieces[i].Position.Y].Piece =
+                        pieces[i];
+                    i++;
+                }
+            }
             
             return pieces;
         }
@@ -46,6 +56,16 @@ namespace Game.Scripts
             for (int i = 8; i < 16; i++)
             {
                 pieces[i] = pawns[i - 8];
+            }
+            
+            for (int y = 6, i = 0; y < 8; y++)
+            {
+                for (int x = 0; x < 8; x++)
+                {
+                    ResourceManager.Instance.Fields[(int) pieces[i].Position.X, (int) pieces[i].Position.Y].Piece =
+                        pieces[i];
+                    i++;
+                }
             }
             
             return pieces;

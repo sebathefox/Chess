@@ -198,6 +198,8 @@ namespace Game.Scripts
 
         public Texture2D Texture => _texture;
 
+        public Vector2 Position => _position;
+
         public GameColor Color
         {
             get { return _color; }
