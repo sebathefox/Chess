@@ -28,6 +28,7 @@ namespace Game.Scripts
         /// <summary>
         /// Creates a new Piece if used as base constructer call.
         /// </summary>
+        /// <param name="id">The player specific id of the piece</param>
         /// <param name="position">The 'virtual' position of the Piece</param>
         /// <param name="pixelPosition">The position in pixels of the Piece</param>
         /// <param name="texture">The Texture of the Piece</param>
@@ -167,6 +168,7 @@ namespace Game.Scripts
             if (_position.X >= 0 && _position.Y >= 0 && _position.X <= 7 && _position.Y <= 7)
             {
                 blockOutOfBounds = false;
+                
 
                 foreach (Piece piece in ResourceManager.Instance.Players[0])
                 {
@@ -184,7 +186,7 @@ namespace Game.Scripts
                         break;
                     }
                 }
-
+                
                 if (blockIsEmpty)
                 {
                     _moveableFields.Add(ResourceManager.Instance.Fields[pos.X, pos.Y]);
