@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>/home/sebastian/RiderProjects/Chess/Game/Content/white_bishop.png</SourceFile>
-  <SourceTime>2019-08-09T08:15:23.954393+02:00</SourceTime>
+  <SourceTime>2019-08-10T16:22:01.243515+02:00</SourceTime>
   <DestFile>/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/Content/white_bishop.xnb</DestFile>
-  <DestTime>2019-08-09T08:34:07.168683+02:00</DestTime>
+  <DestTime>2019-08-12T12:09:28.519293+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-08-05T14:17:34+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
