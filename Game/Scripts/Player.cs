@@ -75,6 +75,8 @@ namespace Game.Scripts
         /// Gets the Color of the player.
         /// </summary>
         public GameColor Color => _color;
+
+        public Piece[] Pieces => _pieces;
         
         public IEnumerator GetEnumerator()
         {
