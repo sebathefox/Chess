@@ -59,9 +59,9 @@ namespace Game.Scripts
         public void KillPiece(int piece)
         {
 
-            ResourceManager.Instance.Fields[(int) _pieces[piece].Position.X, (int) _pieces[piece].Position.Y].Piece = null;
+            ResourceManager.Instance.Fields[(int) _pieces[piece - 1].Position.X, (int) _pieces[piece - 1].Position.Y].Piece = null;
             
-            _pieces[piece] = null;
+            _pieces[piece - 1] = null;
             
         }
         
@@ -75,6 +75,8 @@ namespace Game.Scripts
         /// Gets the Color of the player.
         /// </summary>
         public GameColor Color => _color;
+
+        public Piece[] Pieces => _pieces;
         
         public IEnumerator GetEnumerator()
         {

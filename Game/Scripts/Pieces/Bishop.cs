@@ -11,26 +11,50 @@ namespace Game.Scripts.Pieces
 
         public override void GetMoveableFields()
         {
-            for (int x = (int)_position.X, y = (int)_position.Y; x < 8 && y < 8; x++, y++)
+            int x = (int) _position.X;
+            int y = (int)_position.Y;
+            
+            for (; x <= 7 && y <= 7; x++, y++)
             {
+                if(x == _position.X && y == _position.Y)
+                    continue;
+                
                 if(!AddField(x, y))
                     break;
             }
             
-            for (int x = (int)_position.X, y = (int)_position.Y; x >= 0 && y >= 0; x--, y--)
+            x = (int) _position.X;
+            y = (int)_position.Y;
+            
+            for (; x >= 0 && y >= 0; x--, y--)
             {
+                if(x == _position.X && y == _position.Y)
+                    continue;
+                
                 if(!AddField(x, y))
                     break;
             }
             
-            for (int x = (int)_position.X, y = (int)_position.Y; x < 8 && y >= 0; x++, y--)
+            x = (int) _position.X;
+            y = (int)_position.Y;
+            
+            for (; x <= 7 && y >= 0; x++, y--)
             {
+                if(x == _position.X && y == _position.Y)
+                    continue;
+                
                 if(!AddField(x, y))
                     break;
             }
             
-            for (int x = (int)_position.X, y = (int)_position.Y; x >= 0 && y < 8; x--, y++)
+            x = (int) _position.X;
+            y = (int)_position.Y;
+            
+            for (; x >= 0 && y <= 7; x--, y++)
             {
+                if(x == _position.X && y == _position.Y)
+                    continue;
+                
                 if(!AddField(x, y))
                     break;
             }

@@ -86,6 +86,7 @@ namespace Game.Scripts
                         _oldMouseState.LeftButton == ButtonState.Released && _selected)
                     {
                         Move(_moveableFields[i]);
+                        break;
                     }
                 }
             
@@ -169,15 +170,18 @@ namespace Game.Scripts
             {
                 blockOutOfBounds = false;
                 
+                List<Piece> pieces = new List<Piece>();
+                pieces.AddRange(ResourceManager.Instance.Players[0].Pieces);
+                pieces.AddRange(ResourceManager.Instance.Players[1].Pieces);
 
-                foreach (Piece piece in ResourceManager.Instance.Players[0])
+                foreach (Piece piece in pieces)
                 {
                     if (piece == null)
                         continue;
                     
                     if (pos == piece._position.ToPoint())
                     {
-                        if (ResourceManager.Instance.Players[0].Color != _color)
+                        if (_color != piece._color)
                         {
                             _moveableFields.Add(ResourceManager.Instance.Fields[pos.X, pos.Y]);
                         }

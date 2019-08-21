@@ -23,6 +23,9 @@ namespace Game.Scripts.Pieces
                     
                     if(_position.X + 1 <= 7)
                         fields.Add(ResourceManager.Instance.Fields[(int)_position.X + 1, (int)_position.Y - 1]);
+
+                    if (_position.Y - 2 >= 0 && !_hasMoved)
+                        fields.Add(ResourceManager.Instance.Fields[(int)_position.X, (int)_position.Y - 2]);
                 }
             }
             else
@@ -35,6 +38,9 @@ namespace Game.Scripts.Pieces
                     
                     if(_position.X + 1 <= 7)
                         fields.Add(ResourceManager.Instance.Fields[(int)_position.X + 1, (int)_position.Y + 1]);
+                    
+                    if (_position.Y + 2 <= 7 && !_hasMoved)
+                        fields.Add(ResourceManager.Instance.Fields[(int)_position.X, (int)_position.Y + 2]);
                 }
             }
 
