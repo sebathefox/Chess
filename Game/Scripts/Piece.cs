@@ -44,6 +44,7 @@ namespace Game.Scripts
             _color = color;
             _moveableFields = new List<Field>();
             _id = id;
+            ResourceManager.Instance.Fields[(int) _position.X, (int) _position.Y].Piece = this;
         }
         
         /// <summary>
@@ -173,7 +174,6 @@ namespace Game.Scripts
                 List<Piece> pieces = new List<Piece>();
                 pieces.AddRange(ResourceManager.Instance.Players[0].Pieces);
                 pieces.AddRange(ResourceManager.Instance.Players[1].Pieces);
-
                 foreach (Piece piece in pieces)
                 {
                     if (piece == null)
@@ -181,7 +181,7 @@ namespace Game.Scripts
                     
                     if (pos == piece._position.ToPoint())
                     {
-                        if (_color != piece._color)
+                        if (piece.Color != _color)
                         {
                             _moveableFields.Add(ResourceManager.Instance.Fields[pos.X, pos.Y]);
                         }
@@ -206,9 +206,6 @@ namespace Game.Scripts
 
         public Vector2 Position => _position;
 
-        public GameColor Color
-        {
-            get { return _color; }
-        }
+        public GameColor Color => _color;
     }
 }

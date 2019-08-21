@@ -4,20 +4,20 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>/home/sebastian/RiderProjects/Chess/Game/Content/black_bishop.png</File>
-    <File>/home/sebastian/RiderProjects/Chess/Game/Content/black_castle.png</File>
-    <File>/home/sebastian/RiderProjects/Chess/Game/Content/black_king.png</File>
-    <File>/home/sebastian/RiderProjects/Chess/Game/Content/black_knight.png</File>
-    <File>/home/sebastian/RiderProjects/Chess/Game/Content/black_pawn.png</File>
-    <File>/home/sebastian/RiderProjects/Chess/Game/Content/black_queen.png</File>
-    <File>/home/sebastian/RiderProjects/Chess/Game/Content/board.png</File>
-    <File>/home/sebastian/RiderProjects/Chess/Game/Content/hover_field.png</File>
-    <File>/home/sebastian/RiderProjects/Chess/Game/Content/white_bishop.png</File>
-    <File>/home/sebastian/RiderProjects/Chess/Game/Content/white_castle.png</File>
-    <File>/home/sebastian/RiderProjects/Chess/Game/Content/white_king.png</File>
-    <File>/home/sebastian/RiderProjects/Chess/Game/Content/white_knight.png</File>
-    <File>/home/sebastian/RiderProjects/Chess/Game/Content/white_pawn.png</File>
-    <File>/home/sebastian/RiderProjects/Chess/Game/Content/white_queen.png</File>
+    <File>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/black_bishop.png</File>
+    <File>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/black_castle.png</File>
+    <File>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/black_king.png</File>
+    <File>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/black_knight.png</File>
+    <File>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/black_pawn.png</File>
+    <File>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/black_queen.png</File>
+    <File>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/board.png</File>
+    <File>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/hover_field.png</File>
+    <File>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/white_bishop.png</File>
+    <File>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/white_castle.png</File>
+    <File>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/white_king.png</File>
+    <File>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/white_knight.png</File>
+    <File>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/white_pawn.png</File>
+    <File>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/white_queen.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
