@@ -58,15 +58,25 @@ namespace Game.Scripts
         /// <param name="piece">The index of the piece to remove.</param>
         public void KillPiece(int piece)
         {
-            _pieces[piece] = null;
+
+            ResourceManager.Instance.Fields[(int) _pieces[piece - 1].Position.X, (int) _pieces[piece - 1].Position.Y].Piece = null;
+            
+            _pieces[piece - 1] = null;
+            
         }
         
-
+        /// <summary>
+        /// Indexer to get the player's pieces. 
+        /// </summary>
+        /// <param name="index">The index of the Piece.</param>
         public Piece this[int index] { get => _pieces[index];  set => _pieces[index] = value; }
 
+        /// <summary>
+        /// Gets the Color of the player.
+        /// </summary>
         public GameColor Color => _color;
 
-        public Piece[] Pieces { get => _pieces; set => _pieces = value; }
+        public Piece[] Pieces => _pieces;
         
         public IEnumerator GetEnumerator()
         {

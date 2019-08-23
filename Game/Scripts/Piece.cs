@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Scripts.Network;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -28,6 +29,7 @@ namespace Game.Scripts
         /// <summary>
         /// Creates a new Piece if used as base constructer call.
         /// </summary>
+        /// <param name="id">The player specific id of the piece</param>
         /// <param name="position">The 'virtual' position of the Piece</param>
         /// <param name="pixelPosition">The position in pixels of the Piece</param>
         /// <param name="texture">The Texture of the Piece</param>
@@ -43,14 +45,28 @@ namespace Game.Scripts
             _color = color;
             _moveableFields = new List<Field>();
             _id = id;
+            ResourceManager.Instance.Fields[(int) _position.X, (int) _position.Y].Piece = this;
         }
         
         /// <summary>
         /// Runs every time the main gameloop reaches it's Update method.
         /// </summary>
         /// <param name="gameTime">The deltatime for the game.</param>
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime, PieceState? statz)
         {
+            PieceState stat;
+
+            if (statz.HasValue)
+                stat = statz.Value;
+            else
+                stat = new PieceState(_id, _color, _position);
+            
+            if (stat.Id == _id && stat.Color == _color)
+            {
+                _position = stat.NewPosition;
+                Move(ResourceManager.Instance.Fields[(int)stat.NewPosition.X, (int)stat.NewPosition.Y]);
+            }
+            
             if(_texture == null)
                 return;
             
@@ -85,6 +101,7 @@ namespace Game.Scripts
                         _oldMouseState.LeftButton == ButtonState.Released && _selected)
                     {
                         Move(_moveableFields[i]);
+                        break;
                     }
                 }
             
@@ -134,6 +151,9 @@ namespace Game.Scripts
 
             this._pixelPosition = moveableField.Rect.Location.ToVector2();
 
+            PieceState pieceState = new PieceState(_id, _color, _position);
+
+            NetworkManager.Instance.Self.SendChange(pieceState);
             
             
             _moveableFields.Clear();
@@ -167,15 +187,18 @@ namespace Game.Scripts
             if (_position.X >= 0 && _position.Y >= 0 && _position.X <= 7 && _position.Y <= 7)
             {
                 blockOutOfBounds = false;
-
-                foreach (Piece piece in ResourceManager.Instance.Players[0])
+                
+                List<Piece> pieces = new List<Piece>();
+                pieces.AddRange(ResourceManager.Instance.Players[0].Pieces);
+                pieces.AddRange(ResourceManager.Instance.Players[1].Pieces);
+                foreach (Piece piece in pieces)
                 {
                     if (piece == null)
                         continue;
                     
                     if (pos == piece._position.ToPoint())
                     {
-                        if (ResourceManager.Instance.Players[0].Color != _color)
+                        if (piece.Color != _color)
                         {
                             _moveableFields.Add(ResourceManager.Instance.Fields[pos.X, pos.Y]);
                         }
@@ -184,7 +207,7 @@ namespace Game.Scripts
                         break;
                     }
                 }
-
+                
                 if (blockIsEmpty)
                 {
                     _moveableFields.Add(ResourceManager.Instance.Fields[pos.X, pos.Y]);
@@ -200,9 +223,6 @@ namespace Game.Scripts
 
         public Vector2 Position => _position;
 
-        public GameColor Color
-        {
-            get { return _color; }
-        }
+        public GameColor Color => _color;
     }
 }

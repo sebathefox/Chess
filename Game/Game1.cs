@@ -1,4 +1,9 @@
-﻿using Game.Scripts;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using Game.Scripts;
+using Game.Scripts.Network;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,7 +17,7 @@ namespace Game
 
         private Texture2D _board;
 
-        public Game1()
+        public Game1(string[] args)
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -20,6 +25,35 @@ namespace Game
 
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 600;
+
+            IPEndPoint ep = null;
+
+            if (args.Contains("--server"))
+            {
+                Console.WriteLine("Running as server.");
+                // Create server socket.
+                ep = new IPEndPoint(IPAddress.Any, 5151);
+                NetworkManager.Instance.State = SocketState.Server;
+            }
+            else if(args.Contains("--client"))
+            {
+                if(args.Length > 1) ep = new IPEndPoint(IPAddress.Parse(args[1]), 5151);
+                else ep = new IPEndPoint(IPAddress.Loopback, 5151);
+
+                Console.WriteLine(ep.ToString());
+
+                NetworkManager.Instance.State = SocketState.Client;
+                // Begin connection to the Host server.
+            }
+            
+            NetworkManager.Instance.Self = new GameSocket(NetworkManager.Instance.State, ep);
+        }
+
+        protected override void Initialize()
+        {
+            Window.Title = "Chess " + NetworkManager.Instance.State.ToString();
+            
+            base.Initialize();
         }
 
         protected override void LoadContent()
@@ -48,8 +82,10 @@ namespace Game
 
             #endregion
             
+            // Initializes the board.
             ResourceManager.Instance.Init();
             
+            // Initialises and creates the players and their pieces.
             ResourceManager.Instance.Players[0] = new Player(GameColor.Black);
             ResourceManager.Instance.Players[1] = new Player(GameColor.White);
         }
@@ -60,16 +96,19 @@ namespace Game
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            List<PieceState> states = new List<PieceState>();
+            
+            PieceState? statz = NetworkManager.Instance.Self.PollState();
+            
             for (int i = 0; i < 16; i++)
             {
                 if(ResourceManager.Instance.Players[0][i] != null)
-                    ResourceManager.Instance.Players[0][i].Update(gameTime);
-                
+                    ResourceManager.Instance.Players[0][i].Update(gameTime, statz);
+
                 if(ResourceManager.Instance.Players[1][i] != null)
-                    ResourceManager.Instance.Players[1][i].Update(gameTime);
+                    ResourceManager.Instance.Players[1][i].Update(gameTime, statz);
             }
             
-
             base.Update(gameTime);
         }
 

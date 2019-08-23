@@ -1,15 +1,19 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/home/sebastian/RiderProjects/Chess/GameTests/GameTests.csproj",
+    "projectUniqueName": "C:\\Users\\Sebastian\\RiderProjects\\Chessz\\GameTests\\GameTests.csproj",
     "projectName": "GameTests",
-    "projectPath": "/home/sebastian/RiderProjects/Chess/GameTests/GameTests.csproj",
-    "outputPath": "/home/sebastian/RiderProjects/Chess/GameTests/obj/",
+    "projectPath": "C:\\Users\\Sebastian\\RiderProjects\\Chessz\\GameTests\\GameTests.csproj",
+    "outputPath": "C:\\Users\\Sebastian\\RiderProjects\\Chessz\\GameTests\\obj\\",
     "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+    ],
     "originalTargetFrameworks": [
       "netcoreapp2.2"
     ],
     "sources": {
+      "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
       "https://api.nuget.org/v3/index.json": {}
     },
     "frameworks": {
