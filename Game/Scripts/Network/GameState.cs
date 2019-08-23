@@ -1,14 +1,18 @@
+using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Game.Scripts.Network
 {
-    public class GameState
+    [Serializable]
+    public class GameState : ISerializable
     {
         private GameColor _colorOfCurrentPlayer;
 
-        private List<Piece> _pieces;
+        private List<PieceState> _pieces;
 
-        public GameState(GameColor color, List<Piece> pieces)
+        public GameState(GameColor color, List<PieceState> pieces)
         {
             _colorOfCurrentPlayer = color;
             _pieces = pieces;
@@ -19,9 +23,16 @@ namespace Game.Scripts.Network
             get { return _colorOfCurrentPlayer; }
         }
 
-        public List<Piece> Pieces
+        public List<PieceState> Pieces
         {
             get { return _pieces; }
+        }
+
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("colorOfPlayer", _colorOfCurrentPlayer);
+            info.AddValue("pieces", _pieces);
         }
     }
 }

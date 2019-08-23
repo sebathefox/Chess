@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/hover_field.png</SourceFile>
-  <SourceTime>2019-08-06T15:16:58.1095581+02:00</SourceTime>
-  <DestFile>C:/Users/Sebastian/RiderProjects/Chessz/Game/Content/bin/DesktopGL/Content/hover_field.xnb</DestFile>
-  <DestTime>2019-08-21T16:46:21.8522506+02:00</DestTime>
+  <SourceFile>/home/sebastian/RiderProjects/Chess/Game/Content/hover_field.png</SourceFile>
+  <SourceTime>2019-08-10T16:22:01.243515+02:00</SourceTime>
+  <DestFile>/home/sebastian/RiderProjects/Chess/Game/Content/bin/DesktopGL/Content/hover_field.xnb</DestFile>
+  <DestTime>2019-08-23T08:08:54.946965+02:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2018-08-05T14:17:44+02:00</ImporterTime>
+  <ImporterTime>2018-08-05T14:17:34+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2018-08-05T14:17:44+02:00</ProcessorTime>
+  <ProcessorTime>2018-08-05T14:17:34+02:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Scripts.Network;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -51,8 +52,21 @@ namespace Game.Scripts
         /// Runs every time the main gameloop reaches it's Update method.
         /// </summary>
         /// <param name="gameTime">The deltatime for the game.</param>
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime, PieceState? statz)
         {
+            PieceState stat;
+
+            if (statz.HasValue)
+                stat = statz.Value;
+            else
+                stat = new PieceState(_id, _color, _position);
+            
+            if (stat.Id == _id && stat.Color == _color)
+            {
+                _position = stat.NewPosition;
+                Move(ResourceManager.Instance.Fields[(int)stat.NewPosition.X, (int)stat.NewPosition.Y]);
+            }
+            
             if(_texture == null)
                 return;
             
@@ -137,6 +151,9 @@ namespace Game.Scripts
 
             this._pixelPosition = moveableField.Rect.Location.ToVector2();
 
+            PieceState pieceState = new PieceState(_id, _color, _position);
+
+            NetworkManager.Instance.Self.SendChange(pieceState);
             
             
             _moveableFields.Clear();
