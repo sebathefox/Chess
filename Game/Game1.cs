@@ -40,6 +40,8 @@ namespace Game
                 if(args.Length > 1) ep = new IPEndPoint(IPAddress.Parse(args[1]), 5151);
                 else ep = new IPEndPoint(IPAddress.Loopback, 5151);
 
+                Console.WriteLine(ep.ToString());
+
                 NetworkManager.Instance.State = SocketState.Client;
                 // Begin connection to the Host server.
             }
@@ -49,7 +51,7 @@ namespace Game
 
         protected override void Initialize()
         {
-            Window.Title = NetworkManager.Instance.State.ToString();
+            Window.Title = "Chess " + NetworkManager.Instance.State.ToString();
             
             base.Initialize();
         }
